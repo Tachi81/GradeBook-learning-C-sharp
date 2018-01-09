@@ -19,14 +19,14 @@ namespace Grades
 
             GradeStatistics stats = book.ComputeStatistic();
           
-            book.NameChanged += OnNameChanged;
-            book.Name = "Scott's book";
-
-            WriteNames(book.Name);
 
             Console.WriteLine(stats.AverageGrade);
             Console.WriteLine(stats.HighestGrade);
             Console.WriteLine(stats.LowestGrade);
+
+            //book.NameChanged += OnNameChanged;
+            //book.Name = "Scott's book";
+            //WriteNames(book.Name);
 
             //int number = 20;
             //WriteBytes(number);

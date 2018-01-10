@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Grades
 {
-   public class Program
+    public class Program
     {
 
         static void Main(string[] args)
@@ -16,10 +16,10 @@ namespace Grades
             book.AddGrade(91f);
             book.AddGrade(89.1f);
             book.AddGrade(75f);
+            book.WriteGrades(Console.Out);
+
 
             GradeStatistics stats = book.ComputeStatistic();
-          
-
             Console.WriteLine(stats.AverageGrade);
             Console.WriteLine(stats.HighestGrade);
             Console.WriteLine(stats.LowestGrade);
@@ -47,7 +47,7 @@ namespace Grades
             foreach (string name in names)
             {
                 Console.WriteLine(name);
-            }            
+            }
         }
 
 

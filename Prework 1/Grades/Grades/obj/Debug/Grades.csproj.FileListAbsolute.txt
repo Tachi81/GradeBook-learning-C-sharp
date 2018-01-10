@@ -12,3 +12,4 @@ D:\Dysk Google\3 Ćwiczenia .NET\Prework 1\Grades\Grades\obj\Debug\Grades.csproj
 D:\Dysk Google\3 Ćwiczenia .NET\Prework 1\Grades\Grades\obj\Debug\Grades.csproj.CoreCompileInputs.cache
 D:\Dysk Google\3 Ćwiczenia .NET\Prework 1\Grades\Grades\obj\Debug\Grades.exe
 D:\Dysk Google\3 Ćwiczenia .NET\Prework 1\Grades\Grades\obj\Debug\Grades.pdb
+D:\Dysk Google\3 Ćwiczenia .NET\Prework 1\Grades\Grades\bin\Debug\Grades.txt

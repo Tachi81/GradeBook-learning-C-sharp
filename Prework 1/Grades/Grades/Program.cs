@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,10 +14,45 @@ namespace Grades
         {
 
             GradeBook book = new GradeBook("Daniel's book");
-            book.AddGrade(91f);
-            book.AddGrade(89.1f);
-            book.AddGrade(75f);
+            try
+            {
+
+                string[] lines = File.ReadAllLines("Grades.txt");
+                foreach (string line in lines)
+                {
+                    float grade = float.Parse(line);
+                    book.AddGrade(grade);
+                }
+            }
+            catch (FileNotFoundException )
+            {
+                Console.WriteLine("Coldn't locate file Grades.txt");
+                return;
+            }
+            catch(UnauthorizedAccessException )
+            {
+                Console.WriteLine("No access");
+                return;
+            }
+
+
+
+            //book.AddGrade(91f);
+            //book.AddGrade(89.1f);
+            //book.AddGrade(75f);
             book.WriteGrades(Console.Out);
+
+            try
+            {
+                Console.WriteLine("Please enter a name for the book");
+                book.Name = Console.ReadLine();
+            }
+            catch (ArgumentException )
+            {
+
+                Console.WriteLine("Invalid name");
+            }
+
 
 
             GradeStatistics stats = book.ComputeStatistic();

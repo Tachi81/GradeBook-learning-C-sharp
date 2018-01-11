@@ -14,15 +14,23 @@ namespace Grades
         {
 
             GradeBook book = new GradeBook("Daniel's book");
+            FileStream stream = null;
+            StreamReader reader = null;
             try
             {
 
-                string[] lines = File.ReadAllLines("Grades.txt");
-                foreach (string line in lines)
+                 stream = File.Open("Grades.txt", FileMode.Open);
+                 reader = new StreamReader(stream);
+
+                string line = reader.ReadLine();
+                while (line!=null) // if == null --> this means end of file has been achieved
+               
                 {
                     float grade = float.Parse(line);
                     book.AddGrade(grade);
+                    line = reader.ReadLine(); // reads NEXT line into memory
                 }
+                
             }
             catch (FileNotFoundException )
             {
@@ -33,6 +41,18 @@ namespace Grades
             {
                 Console.WriteLine("No access");
                 return;
+            }
+            finally // "FINALLY" is executed ALWAYS. All is ok? - execute finally. Program throws exception? execute finally before closing it
+            {
+                if (reader != null)
+                {
+                reader.Close();
+                }
+                if(stream!= null)
+                {
+                stream.Close();
+                }
+
             }
 
 

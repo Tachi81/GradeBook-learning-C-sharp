@@ -10,18 +10,44 @@ namespace TabliceKolejkiITP
     {
         static void Main(string[] args)
         {
-            int[] tablica = new int[5];
-            int result = 0;
-            for (int i = 0; i < tablica.Length; i++)
+
+            int i = 0;
+            double srednia = 0;
+
+
+            do
             {
-                tablica[i] = i + 1;
-                result += tablica[i];
-            }
-            for (int i = tablica.Length -1; i >=0 ; i--)
-            {
-                Console.WriteLine(tablica[i]);
-            }
-            Console.WriteLine("suma = "+result);
+                int[] tablica = new int[i + 1];
+                Console.WriteLine("podaj liczbe");
+                string input = Console.ReadLine();
+                int liczbaDoWpisania;
+                int suma = 0;
+
+
+                if (int.TryParse(input, out liczbaDoWpisania) && liczbaDoWpisania != -1)
+                {
+
+                    tablica[i] = liczbaDoWpisania;
+                    i++;
+                }
+                else
+                {
+                    for (int j = 0; j <tablica.Length; j++)
+                    {
+                        suma += tablica[i];
+                    }
+                    Console.WriteLine( suma);
+                    srednia = suma / i;
+                   
+                    Console.WriteLine(srednia);
+                    break;
+                }
+
+
+
+            } while (true);
+
+
 
             Console.ReadKey();
         }

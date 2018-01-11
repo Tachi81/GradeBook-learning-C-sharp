@@ -14,64 +14,57 @@ namespace Grades
         {
 
             GradeBook book = new GradeBook("Daniel's book");
-            FileStream stream = null;
-            StreamReader reader = null;
+
             try
             {
 
-                 stream = File.Open("Grades.txt", FileMode.Open);
-                 reader = new StreamReader(stream);
-
-                string line = reader.ReadLine();
-                while (line!=null) // if == null --> this means end of file has been achieved
-               
-                {
-                    float grade = float.Parse(line);
-                    book.AddGrade(grade);
-                    line = reader.ReadLine(); // reads NEXT line into memory
+                using (FileStream stream = File.Open("Grades.txt", FileMode.Open))
+                using (StreamReader reader = new StreamReader(stream))
+                {                                       // when you exit "using" it calls "Dispose" method that close anything that was opened/created in "using"
+                    string line = reader.ReadLine();
+                    while (line != null) // if == null --> this means end of file has been achieved
+                    {
+                        float grade = float.Parse(line);
+                        book.AddGrade(grade);
+                        line = reader.ReadLine(); // reads NEXT line of file into memory
+                    }
                 }
-                
+
             }
-            catch (FileNotFoundException )
+            catch (FileNotFoundException)
             {
                 Console.WriteLine("Coldn't locate file Grades.txt");
                 return;
             }
-            catch(UnauthorizedAccessException )
+            catch (UnauthorizedAccessException)
             {
                 Console.WriteLine("No access");
                 return;
             }
-            finally // "FINALLY" is executed ALWAYS. All is ok? - execute finally. Program throws exception? execute finally before closing it
-            {
-                if (reader != null)
-                {
-                reader.Close();
-                }
-                if(stream!= null)
-                {
-                stream.Close();
-                }
-
-            }
-
-
 
             //book.AddGrade(91f);
             //book.AddGrade(89.1f);
             //book.AddGrade(75f);
             book.WriteGrades(Console.Out);
 
-            try
-            {
-                Console.WriteLine("Please enter a name for the book");
-                book.Name = Console.ReadLine();
-            }
-            catch (ArgumentException )
-            {
 
-                Console.WriteLine("Invalid name");
-            }
+            do
+                try
+                {
+                    {
+                        Console.WriteLine("Please enter a name for the book");
+                        book.Name = Console.ReadLine();
+                    }
+                }
+                catch (ArgumentException ex )
+                {
+                    Console.WriteLine("Invalid name");
+                    Console.WriteLine(ex.Message);
+                    Console.WriteLine();
+                }
+
+            while (book.Name == "Daniel's book");
+            Console.WriteLine(String.IsNullOrEmpty(book.Name));
 
 
 

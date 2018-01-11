@@ -14,6 +14,7 @@ namespace Grades
         {
 
             GradeBook book = new GradeBook("Daniel's book");
+            GradebookThatThrowsAwayLowestGrade book2 = new GradebookThatThrowsAwayLowestGrade("Toms's book");
 
             try
             {
@@ -26,6 +27,7 @@ namespace Grades
                     {
                         float grade = float.Parse(line);
                         book.AddGrade(grade);
+                        book2.AddGrade(grade);
                         line = reader.ReadLine(); // reads NEXT line of file into memory
                     }
                 }
@@ -46,33 +48,36 @@ namespace Grades
             //book.AddGrade(89.1f);
             //book.AddGrade(75f);
             book.WriteGrades(Console.Out);
+            book2.WriteGrades(Console.Out);
 
 
-            do
-                try
-                {
-                    {
-                        Console.WriteLine("Please enter a name for the book");
-                        book.Name = Console.ReadLine();
-                    }
-                }
-                catch (ArgumentException ex )
-                {
-                    Console.WriteLine("Invalid name");
-                    Console.WriteLine(ex.Message);
-                    Console.WriteLine();
-                }
+            //do
+            //    try
+            //    {
+            //        {
+            //            Console.WriteLine("Please enter a name for the book");
+            //            book.Name = Console.ReadLine();
+            //            Console.WriteLine("Please enter a name for the book that throws away lowest grade");
+            //            book2.Name = Console.ReadLine();
+            //        }
+            //    }
+            //    catch (ArgumentException ex)
+            //    {
+            //        Console.WriteLine("Invalid name");
+            //        Console.WriteLine(ex.Message);
+            //        Console.WriteLine();
+            //    }
 
-            while (book.Name == "Daniel's book");
-            Console.WriteLine(String.IsNullOrEmpty(book.Name));
-
-
+            //while (book.Name == "Daniel's book");
 
             GradeStatistics stats = book.ComputeStatistic();
-            Console.WriteLine(stats.AverageGrade);
-            Console.WriteLine(stats.HighestGrade);
-            Console.WriteLine(stats.LowestGrade);
-            Console.WriteLine("{0} {1}", stats.LetterGrade, stats.Description);
+            GradeStatistics stats2 = book2.ComputeStatistic();
+            Console.WriteLine(book.Name);
+            WriteStatistics(stats);
+            Console.WriteLine(book2.Name);
+            WriteStatistics(stats2);
+
+
 
             //book.NameChanged += OnNameChanged;
             //book.Name = "Scott's book";
@@ -84,6 +89,14 @@ namespace Grades
 
             //Immutable();
             //ParamsAsValueOrAsReference();
+        }
+
+        private static void WriteStatistics(GradeStatistics stats)
+        {
+            Console.WriteLine(stats.AverageGrade);
+            Console.WriteLine(stats.HighestGrade);
+            Console.WriteLine(stats.LowestGrade);
+            Console.WriteLine("{0} {1}", stats.LetterGrade, stats.Description);
         }
 
         private static void OnNameChanged(object sender, NameChangedEventArgs args)

@@ -30,7 +30,7 @@ namespace Grades
             textWriter.WriteLine("*******************");
         }
 
-        public GradeStatistics ComputeStatistic()
+        public virtual GradeStatistics ComputeStatistic()
         {
             GradeStatistics stats = new GradeStatistics();
             float  sum = 0f;
@@ -79,6 +79,6 @@ namespace Grades
         }
         public event NameChangedDelegate NameChanged;
 
-       private List<float> _grades;
+       protected List<float> _grades;
     }
 }

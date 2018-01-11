@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GradeBook.cs" />
+    <Compile Include="GradebookThatThrowsAwayLowestGrade.cs" />
     <Compile Include="GradeStatistics.cs" />
     <Compile Include="NameChangedDelegate.cs" />
     <Compile Include="NameChangedEventArgs.cs" />
